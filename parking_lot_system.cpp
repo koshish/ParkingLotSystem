@@ -1,6 +1,7 @@
 #include<string>
 #include<fstream>
 #include<iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -41,16 +42,17 @@ void delete_operators()
 {
 	cout << "Delete an Operator Username \n";
 	cout << "Operator Username: ";
-	int to_delete;
+	char to_delete[100];
 	cin >> to_delete;
+	int i,j;
 	for (int i=0; i<operator_index; i++) 
 	{
-		if (to_delete == o[i].username)
+		if (strcmp(o[i].username,to_delete ))
 		{
-			for(int j=i; j<operator_index-1 ; j++)
+			for(j=i; j<operator_index-1 ; j++)
 			{
-				o[j].username=o[j+1].username;
-				o[j].password=o[j+1].password;
+				strcpy(o[j].username,o[j+1].username);
+				strcpy(o[j].password,o[j+1].password);
 			}
 		operator_index--;
 		break;	
@@ -114,6 +116,13 @@ void list_parking_lot()
 
 void save_operators_to_file()
 {
+	std::ofstream myfile;
+	myfile.open("operators.csv");
+	for(int i=0; i<operator_index; i++)
+	{
+		myfile << o[i].username << "," << o[i].password << "," << o[i].parking_lot_id << "\n";
+	}
+	myfile.close();
 
 }
 
@@ -121,9 +130,16 @@ void load_opeators_from_file()
 {
 
 }
+
 void save_parking_lots_to_file()
 {
-
+    std::ofstream myfile;
+	myfile.open("parking_lots.csv");
+	for(int i=0; i<parking_lot_index; i++)
+	{
+		myfile << p[i].parking_id << "," << p[i].number_of_parking_space << "," << p[i].hourly_rate << "\n";
+	}
+	myfile.close();
 }
 
 void load_parking_lots_from_file()
