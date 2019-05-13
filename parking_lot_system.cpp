@@ -39,7 +39,23 @@ void add_operators()
 
 void delete_operators()
 {
-
+	cout << "Delete an Operator Username \n";
+	cout << "Operator Username: ";
+	int to_delete;
+	cin >> to_delete;
+	for (int i=0; i<operator_index; i++) 
+	{
+		if (to_delete == o[i].username)
+		{
+			for(int j=i; j<operator_index-1 ; j++)
+			{
+				o[j].username=o[j+1].username;
+				o[j].password=o[j+1].password;
+			}
+		operator_index--;
+		break;	
+		}
+	}
 }
 
 void add_parking_lot()
@@ -57,7 +73,23 @@ void add_parking_lot()
 
 void delete_parking_lot()
 {
-
+	cout << "Parking Lot ID to delete \n";
+	int to_delete;
+	cin >> to_delete;
+	for (int i=0; i<parking_lot_index; i++) 
+	{
+		if (to_delete == p[i].parking_id)
+		{
+			for(int j=i; j<parking_lot_index-1 ; j++)
+			{
+				p[j].parking_id=p[j+1].parking_id;
+				p[j].number_of_parking_space=p[j+1].number_of_parking_space;
+				p[j].hourly_rate=p[j+1].hourly_rate;
+			}
+		parking_lot_index--;
+		break;	
+		}
+	}
 }
 
 void list_operators()
